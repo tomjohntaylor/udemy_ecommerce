@@ -26,3 +26,9 @@ class ContactForm(forms.Form):
             }
         )
     )
+
+    def clean_email(self):
+        email = self.cleaned_data.get("email")
+        if not email.endswith("@gmail.com"):
+            raise forms.ValidationError("Email has to be @gmail.com")
+        return email
